@@ -1,0 +1,79 @@
+#thread-box
+{
+    font-family: 'Helvetica';
+    padding: 20px 20px 0px 20px;
+    font-size: 10pt;
+    background-color: #DFDFDF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+
+}
+
+.thread-box hr
+{
+    width: 90%;
+    padding: 10px 0px 10px 0px;
+    border-top: 0px;
+}
+
+.thread-title
+{
+    font-size: 13pt;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+.thread-message
+{
+    font-family: Helvetica;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.sidebox-message
+{
+    font-size: 0.8em;
+    text-align: left;
+    border-right: 1px solid #EFEFEF;
+    float:left;
+}
+
+.avatar
+{
+    background: #ffffff;
+    padding: 2px;
+    border: 1px solid #ddd;
+    /* Round Corners (native in Safari, Firefox and Chrome) */
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    /* Add the Shadow */
+    -moz-box-shadow: 2px 2px 2px #dddddd;
+    -webkit-box-shadow: 2px 2px 2px #dddddd;
+    width: 40px;
+}
+
+.post-author
+{
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.post-date
+{
+    font-style: italic;
+    padding-top: 15px;
+}
+
+.box-message
+{
+    font-family: Helvetica, Arial;
+}
+
+#id_title, #id_name
+{
+    width: 70%;
+}

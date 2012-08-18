@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load url from future %}
+{% load crispy_forms_tags %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block title %}{% trans 'New Thread' %}{% endblock %}
+
+{% block main %}
+
+    <form method="post" action="" class="well form-inline">
+        {% csrf_token %}
+        {{ new_thread_form|crispy }}
+        <input type="submit" value="{% trans 'Send' %}">
+    </form>
+
+    <script type="text/javascript">
+        window.onload = function()
+        {
+            CKEDITOR.replace( 'id_body',
+                    {
+                        customConfig : '{{ STATIC_URL }}ckeditor/my_config.js',
+                        toolbar : 'Custom'
+                    });
+        };
+    </script>
+
+{% endblock %}

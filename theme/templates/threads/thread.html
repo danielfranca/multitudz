@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load url from future %}
+{% load crispy_forms_tags %}
+{% load thumbnail %}
+{% load humanize %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block main %}
+
+    <div class="grid_8" id="thread-box">
+        <p class="thread-title grid_8">{{ thread.title }}</p>
+            <div class="grid_8" id="thread-messages">
+                {% for message in messages %}
+                    {% include "threads/thread_message.html" %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <form id='message-form' method="POST" action="" class="well form-inline grid_9"  accept-charset="utf-8">
+            {% csrf_token %}
+            {{ message_form|crispy }}
+
+            <input type="hidden" id='thread_id' value={{ thread.id }}>
+            <input type="button" value="{% trans 'Send' %}" onclick="send_reply();">
+        </form>
+    {% endif %}
+
+    <script type="text/javascript">
+        window.onload = function()
+        {
+            CKEDITOR.replace( 'id_body',
+                    {
+                        customConfig : '{{ STATIC_URL }}ckeditor/my_config.js',
+                        toolbar : 'Custom'
+                    });
+        };
+    </script>
+
+{% endblock %}
+
+
+{% block extra_body %}
+
+    <script type="text/javascript">
+
+        function send_reply() {
+            $('#id_body')[0].value = CKEDITOR.instances.id_body.getData();
+
+            if ( $('#id_body')[0].value.length == 0 )
+                return;
+
+            data = $('#message-form').serializeObject(true);
+
+            thread_id = parseInt( $('#thread_id')[0].value )
+            Dajaxice.threads.send_reply(Dajax.process,{'thread_id':thread_id,'form':data});
+            $('#id_body')[0].value = CKEDITOR.instances.id_body.setData('');
+        };
+
+        var interval = window.setInterval(refreshPage, 2000);
+        function refreshPage() {
+            $('#id_body')[0].value = CKEDITOR.instances.id_body.getData();
+            if ( $('#id_body')[0].value.length > 0 )
+                return;
+
+            thread_id = parseInt( $('#thread_id')[0].value );
+            Dajaxice.threads.refresh_messages(Dajax.process,{'thread_id':thread_id});
+        }
+
+    </script>
+
+{% endblock %}
