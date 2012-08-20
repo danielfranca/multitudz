@@ -83,10 +83,11 @@ MEDIA_URL = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-import os
+import os, sys
 
 # Full filesystem path to the project.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -97,7 +98,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, STATIC_URL.strip("/"))
 # Additional locations of static files
 STATICFILES_DIRS = (
 
-    'theme/static',
+    'apps/theme/static',
     '.'
 
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -149,7 +150,7 @@ WSGI_APPLICATION = 'expow.wsgi.application'
 
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),os.path.join(PROJECT_ROOT, "theme/templates"))
+TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),os.path.join(PROJECT_ROOT, "apps/theme/templates"))
 
 
 INSTALLED_APPS = (
