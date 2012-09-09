@@ -29,8 +29,6 @@ urlpatterns = patterns('',
     (r'^accounts/', include('django_facebook.auth_urls')),
     url(r'^admin_tools/', include('admin_tools.urls')),
 
-    (r'^tinymce/', include('tinymce.urls')),
-
     ##########################################
     ## Threads
     ##########################################

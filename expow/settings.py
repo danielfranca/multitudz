@@ -16,6 +16,16 @@ DATABASES = {
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'TEST_NAME':'test_bdd.db',
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+
+    },
+    'test_bdd': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'test_bdd.db',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -87,7 +97,7 @@ import os, sys
 
 # Full filesystem path to the project.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+#sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -98,7 +108,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, STATIC_URL.strip("/"))
 # Additional locations of static files
 STATICFILES_DIRS = (
 
-    'apps/theme/static',
+    'theme/static',
     '.'
 
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -150,7 +160,9 @@ WSGI_APPLICATION = 'expow.wsgi.application'
 
 DJANGO_WYSIWYG_FLAVOR = "ckeditor"
 
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),os.path.join(PROJECT_ROOT, "apps/theme/templates"))
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),os.path.join(PROJECT_ROOT, "theme/templates"))
 
 
 INSTALLED_APPS = (
@@ -170,19 +182,21 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     #Outros apps
+    'easy_thumbnails',
     'django_facebook',
     'south',
     'django_wysiwyg',
     'ajax_select',
     'crispy_forms',
-    'easy_thumbnails',
+    'django_nose',
+
     'dajaxice',
     'dajax',
-
     #Meus apps
     'accounts',
     'common',
     'threads',
+    'simple',
     # Uncomment the next line to enable the admin:
 
     # Uncomment the next line to enable admin documentation:
